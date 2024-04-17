@@ -10,6 +10,8 @@ use App\Http\Controllers\Api\DoctorScheduleController;
 use App\Http\Controllers\Api\ServiceMedicinesController;
 use App\Http\Controllers\Api\PatientScheduleController;
 use App\Http\Controllers\Api\SatuSehatTokenController;
+use App\Http\Controllers\Api\MedicalRecordController;
+use App\Http\Controllers\Api\PaymentDetailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,3 +51,12 @@ Route::apiResource('/api-patient-schedules', PatientScheduleController::class)->
 
 //token
 Route::get('/satusehat-token', [SatuSehatTokenController::class, 'token']);
+
+//medical records
+Route::apiResource('/api-medical-records', MedicalRecordController::class)->middleware('auth:sanctum');
+
+//get service by patient schedule id
+Route::get('/api-medical-records/services/{id}', [MedicalRecordController::class, 'getServicesByScheduleId'])->middleware('auth:sanctum');
+
+//payment details
+Route::apiResource('/api-payment-details', PaymentDetailController::class)->middleware('auth:sanctum');
